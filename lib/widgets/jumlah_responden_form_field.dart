@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class jumlahRespondenFormField extends StatelessWidget {
+class JumlahRespondenFormField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final FormFieldValidator<String>? validator;
   final String? currentValue;
   final FocusNode? nextFocusNode;
   final FocusNode? focusNode;
 
-  const jumlahRespondenFormField({
+  const JumlahRespondenFormField({
     Key? key,
     required this.onChanged,
     required this.currentValue,
@@ -24,6 +24,7 @@ class jumlahRespondenFormField extends StatelessWidget {
     return TextFormField(
       focusNode: focusNode,
       onFieldSubmitted: (_) => nextFocusNode?.requestFocus(),
+      keyboardType: TextInputType.number,
       initialValue: currentValue,
       onChanged: onChanged,
       decoration: InputDecoration(

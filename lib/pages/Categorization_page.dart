@@ -3,19 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:kalkulator/main.dart';
 import 'package:kalkulator/models/Categorization_view_model.dart';
 import 'package:kalkulator/pages/Calculate_page.dart';
-import 'package:kalkulator/widgets/nama_variabel_form_field.dart';
+import 'package:kalkulator/widgets/Categorization_form.dart';
 import 'package:kalkulator/widgets/navigation_drawer_widget.dart';
 
 class CategorizationPage extends StatefulWidget {
-  final GlobalKey<FormState> formKey;
-  final ValueChanged<CategorizationViewModel> onChanged;
-  final CategorizationViewModel viewModel;
-
-  const CategorizationPage({
+  CategorizationPage({
     Key? key,
-    required this.formKey,
-    required this.onChanged,
-    required this.viewModel,
   }) : super(key: key);
 
   @override
@@ -23,25 +16,8 @@ class CategorizationPage extends StatefulWidget {
 }
 
 class _CategorizationPageState extends State<CategorizationPage> {
-  final namaVariabelFocus = FocusNode();
-  final jumlahRespondenFocus = FocusNode();
-  final jumlahTotalSkorFocus = FocusNode();
-  final jumlahItemValidFocus = FocusNode();
-  final nilaiSkalaTerkecilFocus = FocusNode();
-  final nilaiSkalaTerbesarFocus = FocusNode();
-  final nilaiTengahSkalaFocus = FocusNode();
-
-  @override
-  void dispose() {
-    namaVariabelFocus.dispose();
-    jumlahRespondenFocus.dispose();
-    jumlahTotalSkorFocus.dispose();
-    jumlahItemValidFocus.dispose();
-    nilaiSkalaTerkecilFocus.dispose();
-    nilaiSkalaTerbesarFocus.dispose();
-    nilaiTengahSkalaFocus.dispose();
-    super.dispose();
-  }
+  final formKey = GlobalKey<FormState>();
+  var viewModel = CategorizationViewModel.newCategorization();
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +25,46 @@ class _CategorizationPageState extends State<CategorizationPage> {
         // resizeToAvoidBottomInset: false,
         drawer: const NavigationDrawerWidget(),
         appBar: appBar,
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RaisedButton(
+                child: Text(
+                  "Reset",
+                  style: TextStyle(color: textColor),
+                ),
+                color: buttonColor,
+                onPressed: () {
+                  // if (_formKey.currentState.validate()) {}
+                },
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              RaisedButton(
+                child: Text(
+                  "Calculate",
+                  style: TextStyle(color: textColor),
+                ),
+                color: buttonColor,
+                onPressed: () {
+                  final isValid = formKey.currentState!.validate();
+
+                  assert(
+                    isValid == viewModel.isValid(),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return CalculatePage();
+                      }),
+                    ),
+                  );
+                  // print("Categorization Valid : $isValid\n$viewModel");
+                },
+              ),
+            ],
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -88,158 +104,30 @@ class _CategorizationPageState extends State<CategorizationPage> {
               SizedBox(
                 height: 20,
               ),
-              Form(
-                key: widget.formKey,
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
-                  height: MediaQuery.of(context).size.height -
-                      appBar.preferredSize.height -
-                      133,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(15.0),
-                    ),
-                    border: Border.all(color: borderColor),
-                    color: primaryColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: secondaryColor,
-                        offset: Offset(0.0, 1.0), //(x,y)
-                        blurRadius: 5.0,
-                      ),
-                    ],
-                    // color: Colors.white,
+              Container(
+                padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
+                height: MediaQuery.of(context).size.height -
+                    appBar.preferredSize.height +
+                    100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(15.0),
                   ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        NamaVariabelFormField(
-                          focusNode: namaVariabelFocus,
-                          nextFocusNode: jumlahRespondenFocus,
-                          onChanged: (s) => widget.onChanged(
-                              widget.viewModel.copyWith(namaVariabel: s)),
-                          currentValue: widget.viewModel.namaVariabel,
-                          validator: widget.viewModel.namaVariabelValidator,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: new InputDecoration(
-                            // hintText: "Masukkan nama variab",
-                            labelText: "Jumlah Responden",
-                            // icon: Icon(Icons.people),
-                            border: OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(5.0)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: new InputDecoration(
-                            // hintText: "Masukkan nama variab",
-                            labelText: "Jumlah Total Skor",
-                            // icon: Icon(Icons.people),
-                            border: OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(5.0)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: new InputDecoration(
-                            // hintText: "Masukkan nama variab",
-                            labelText: "Jumlah Item Valid",
-                            // icon: Icon(Icons.people),
-                            border: OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(5.0)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: new InputDecoration(
-                            // hintText: "Masukkan nama variab",
-                            labelText: "Nilai Skala Terkecil",
-                            // icon: Icon(Icons.people),
-                            border: OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(5.0)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: new InputDecoration(
-                            // hintText: "Masukkan nama variab",
-                            labelText: "Nilai Skala Terbesar",
-                            // icon: Icon(Icons.people),
-                            border: OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(5.0)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: new InputDecoration(
-                            // hintText: "Masukkan nama variab",
-                            labelText: "Nilai Tengah Skala",
-                            // icon: Icon(Icons.people),
-                            border: OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(5.0)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RaisedButton(
-                              child: Text(
-                                "Reset",
-                                style: TextStyle(color: textColor),
-                              ),
-                              color: buttonColor,
-                              onPressed: () {
-                                // if (_formKey.currentState.validate()) {}
-                              },
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            RaisedButton(
-                              child: Text(
-                                "Calculate",
-                                style: TextStyle(color: textColor),
-                              ),
-                              color: buttonColor,
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) {
-                                    return CalculatePage();
-                                  }),
-                                );
-                                // if (_formKey.currentState.validate()) {}
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                  border: Border.all(color: borderColor),
+                  color: primaryColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: secondaryColor,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 5.0,
                     ),
-                  ),
+                  ],
+                  // color: Colors.white,
                 ),
+                child: CategorizationForm(
+                    formKey: formKey,
+                    onChanged: (value) => setState(() => viewModel = value),
+                    viewModel: viewModel),
               ),
             ],
           ),

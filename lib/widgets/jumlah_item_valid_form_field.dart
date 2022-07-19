@@ -24,6 +24,7 @@ class JumlahItemValidFormField extends StatelessWidget {
     return TextFormField(
       focusNode: focusNode,
       onFieldSubmitted: (_) => nextFocusNode?.requestFocus(),
+      keyboardType: TextInputType.number,
       initialValue: currentValue,
       onChanged: onChanged,
       decoration: InputDecoration(

@@ -4,12 +4,12 @@ import '../util/string_extensions.dart';
 @immutable
 class CategorizationViewModel {
   final String? namaVariabel;
-  final int? jumlahResponden;
-  final int? jumlahTotalSkor;
-  final int? jumlahItemValid;
-  final int? nilaiSkalaTerkecil;
-  final int? nilaiSkalaTerbesar;
-  final int? nilaiTengahSkala;
+  final String? jumlahResponden;
+  final String? jumlahTotalSkor;
+  final String? jumlahItemValid;
+  final String? nilaiSkalaTerkecil;
+  final String? nilaiSkalaTerbesar;
+  final String? nilaiTengahSkala;
 
   CategorizationViewModel(
     this.namaVariabel,
@@ -60,50 +60,50 @@ class CategorizationViewModel {
     }
   }
 
-  String? jumlahRespondenValidator(int? i) {
-    if (i == null) {
+  String? jumlahRespondenValidator(String? s) {
+    if (s == null || s.isWhitespace()) {
       return "Nama Variabel Harus Diisi";
     }
   }
 
-  String? jumlahTotalSkorValidator(int? i) {
-    if (i == null) {
+  String? jumlahTotalSkorValidator(String? s) {
+    if (s == null || s.isWhitespace()) {
       return "Nama Variabel Harus Diisi";
     }
   }
 
-  String? jumlahItemValidValidator(int? i) {
-    if (i == null) {
+  String? jumlahItemValidValidator(String? s) {
+    if (s == null || s.isWhitespace()) {
       return "Nama Variabel Harus Diisi";
     }
   }
 
-  String? nilaiSkalaTerkecilValidator(int? i) {
-    if (i == null) {
+  String? nilaiSkalaTerkecilValidator(String? s) {
+    if (s == null || s.isWhitespace()) {
       return "Nama Variabel Harus Diisi";
     }
   }
 
-  String? nilaiSkalaTerbesarValidator(int? i) {
-    if (i == null) {
+  String? nilaiSkalaTerbesarValidator(String? s) {
+    if (s == null || s.isWhitespace()) {
       return "Nama Variabel Harus Diisi";
     }
   }
 
-  String? nilaiTengahSkalaValidator(int? i) {
-    if (i == null) {
+  String? nilaiTengahSkalaValidator(String? s) {
+    if (s == null || s.isWhitespace()) {
       return "Nama Variabel Harus Diisi";
     }
   }
 
   CategorizationViewModel copyWith({
     String? namaVariabel,
-    int? jumlahResponden,
-    int? jumlahTotalSkor,
-    int? jumlahItemValid,
-    int? nilaiSkalaTerkecil,
-    int? nilaiSkalaTerbesar,
-    int? nilaiTengahSkala,
+    String? jumlahResponden,
+    String? jumlahTotalSkor,
+    String? jumlahItemValid,
+    String? nilaiSkalaTerkecil,
+    String? nilaiSkalaTerbesar,
+    String? nilaiTengahSkala,
   }) {
     return CategorizationViewModel(
       namaVariabel ?? this.namaVariabel,
