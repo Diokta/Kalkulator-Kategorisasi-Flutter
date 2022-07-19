@@ -7,8 +7,8 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appName = 'Calculation App';
-    final urlImage =
+    const appName = 'Calculation App';
+    const urlImage =
         'https://cdn2.iconfinder.com/data/icons/ios7-inspired-mac-icon-set/512/Calculator_512.png';
 
     return Drawer(
@@ -22,7 +22,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               appName: appName,
               // onClicked: () {},
             ),
-            Divider(
+            const Divider(
               color: Colors.black,
             ),
             buildMenuItem(
@@ -54,19 +54,19 @@ class NavigationDrawerWidget extends StatelessWidget {
       InkWell(
         // onTap: onClicked,
         child: Container(
-          padding: padding.add(EdgeInsets.only(top: 40, bottom: 18)),
+          padding: padding.add(const EdgeInsets.only(top: 40, bottom: 18)),
           child: Row(
             children: <Widget>[
               CircleAvatar(
                 radius: 14,
                 backgroundImage: NetworkImage(urlImage),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Text(
                 appName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                 ),
               )
@@ -87,7 +87,7 @@ class NavigationDrawerWidget extends StatelessWidget {
       ),
       title: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black,
         ),
       ),

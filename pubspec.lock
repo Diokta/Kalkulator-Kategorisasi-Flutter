@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  dotted_line:
+    dependency: "direct main"
+    description:
+      name: dotted_line
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -116,6 +123,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  im_stepper:
+    dependency: "direct main"
+    description:
+      name: im_stepper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1+1"
+  linear_step_indicator:
+    dependency: "direct main"
+    description:
+      name: linear_step_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0+3"
   lints:
     dependency: transitive
     description:
@@ -144,6 +165,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  page_view_indicators:
+    dependency: "direct main"
+    description:
+      name: page_view_indicators
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   path:
     dependency: transitive
     description:
